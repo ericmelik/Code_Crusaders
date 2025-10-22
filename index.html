@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Menu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="exam-menu-card">
+      <h1>Exam Menu</h1>
+      <div class="title-underline"></div>
+
+      <form id="examForm">
+        <div class="form-group">
+          <label for="search1">Search</label>
+          <input type="text" id="search1" placeholder="Search by name or ID...">
+        </div>
+
+        <div class="grid-two-col">
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" id="time" required>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="examType">Exam Type</label>
+          <select id="examType" required>
+            <option value="">Select exam type...</option>
+            <!-- <option value="physical">Physical Examination</option>
+            <option value="blood">Blood Test</option>
+            <option value="xray">X-Ray</option>
+            <option value="mri">MRI Scan</option>
+            <option value="ct">CT Scan</option>
+            <option value="ultrasound">Ultrasound</option> -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="location" value="Building A" checked>
+              <span>Building A</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="location" value="Building B">
+              <span>Building B</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="location" value="Building C">
+              <span>Building C</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" required>
+            <option value="">Select subject...</option>
+            <!-- <option value="cardiology">Cardiology</option>
+            <option value="neurology">Neurology</option>
+            <option value="orthopedics">Orthopedics</option>
+            <option value="radiology">Radiology</option>
+            <option value="pediatrics">Pediatrics</option>
+            <option value="general">General Medicine</option>
+            <option value="dermatology">Dermatology</option>
+            <option value="ophthalmology">Ophthalmology</option> -->
+          </select>
+        </div>
+
+        <div class="button-container">
+          <button type="submit" class="schedule-btn">Schedule Exam</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="appointments-card">
+      <h2>Scheduled Appointments</h2>
+      <div class="title-underline"></div>
+
+      <div class="appointments-empty" id="emptyState">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <p>No appointments scheduled yet.<br>Fill out the form to schedule an exam.</p>
+      </div>
+
+      <div id="appointmentsList" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
