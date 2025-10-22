@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+    <style>
+        /* CSS will go here */
+        body{
+            background-color: darkblue;   /* dark blue background */
+            height: 100vh;                  /* full height of screen */
+            display:flex;                   /* use flexbox layout */
+            justify-content: center;        /* center horizontally */
+            align-items: center;            /* center vertically */
+        }
+
+        .container{
+            background-color: grey;                   /* adds the grey color */
+            padding: 100px;                              /* centers the box */
+            border-radius: 8px;                         /* rouds the corners */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);   /* light shadow */
+        }
+        label{
+            display:block;                  /* creates the box */
+            margin-top: 10px;               /* moves margin to top */
+            color: #000;                  /* black label */
+        }
+        input{
+            display: block;                 /* puts input below its label */
+            width: 100%;                    /* make input fill container width */
+            padding: 8px;                   /* space inside the box */
+            margin-top: 4px;                /* small space between label and input*/
+            border: 1px solid #aaa;       /* makes border thin */
+            border-radius: 4px;             /* round corners */
+            box-sizing: border-box;         /* creates width and padding */
+        }
+
+        button{
+            background-color: #000;       /* black background */
+            color: white;                 /* white text */
+            border: none;                   /* removes borders */
+            padding: 10px 20px;             /* makes space for the inputs */
+            border-radius: 4px;             /* round corners */
+            cursor: pointer;                /* makes curoser a hand */
+            margin-top: 15px;               /* space above the bottom */
+        }
+    </style>
+</head>
+<body>
+    <div class = "container">
+
+    <h2>Create Account</h2>
+    <form>
+        <label for= "email">Email:</label>
+        <input id= "email" type= "email" placeholder= "Enter Email">
+
+        <label for="text">NSHE:</label>
+        <input id= "text" type= "text" placeholder= "Enter NSHE ID">
+
+        <button>Create</button>
+    </form>
+</body>
+</html>
