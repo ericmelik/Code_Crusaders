@@ -4,31 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Confirmation Page</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: white;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
+      padding-top: 160px;
+      padding-bottom: 140px;
+      box-sizing: border-box;
       text-align: center;
-      
-    }
-
-    .card {
-        background-color: white;
-        max-width: 800px;
-        max-height: 800px;
-        width: 90%;
-        padding: 20px;
-        border-radius: 10px;
-        border: 10px solid yellow;
-        outline: 4px solid black;
-        font-weight: bold;
-        
     }
 
     header {
@@ -45,9 +34,43 @@
       left: 20px;
     }
 
+    .top-bar {
+      width: 100%;
+      height: 100px;
+      background-color: #004990;
+    }
+
+    .card {
+      background-color: white;
+      max-width: 800px;
+      width: 90%;
+      padding: 30px;
+      border-radius: 10px;
+      border: 10px solid yellow;
+      outline: 4px solid black;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .details {
+      text-align: left;
+      margin-top: 20px;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    dt {
+      font-weight: bold;
+    }
+
+    dd {
+      margin: 0 0 12px 0;
+      padding-left: 10px;
+    }
+
     .button-container {
-      margin-top: 20px; 
-      text-align: center; 
+      margin-top: 20px;
+      text-align: center;
     }
 
     .btn {
@@ -63,75 +86,60 @@
     }
 
     .btn:hover {
-      background-color: #ffc107; 
+      background-color: #ffc107;
       transform: translateY(-2px);
     }
 
     .footer {
-      width: 100%;             
-      height: 100px;            
-      background-color: #004990;  
-      position: fixed;  
-      bottom: 0;
-      left: 0;
-      z-index: 1000; 
-}
-
-    .top-bar {
-      width: 100%; 
+      width: 100%;
       height: 100px;
       background-color: #004990;
-      
-      margin-bottom: 100px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
     }
-
   </style>
 </head>
+
 <body>
 
-    <header>
-      <img src="csn image.webp" alt="CSN Logo" class="logo">
-      <div class="top-bar">
+  <header>
+    <img src="{{ url_for('static', filename='csn_image.webp') }}" alt="CSN Logo" class="logo">
+    <div class="top-bar"></div>
+  </header>
 
-      </div>
-    </header>
+  <!-- CONFIRMATION CARD -->
+  <div class="card">
+    <h1>Exam Confirmed</h1>
+    <p>Here are your booking details:</p>
 
+    <dl class="details">
+      <dt>Student:</dt>
+      <dd>{{ data.search }}</dd>
 
+      <dt>Date:</dt>
+      <dd>{{ data.date }}</dd>
 
+      <dt>Time:</dt>
+      <dd>{{ data.time }}</dd>
 
-    <div class="card">
-        <h1>Exam Confirmed</h1>
-        <p>Booking Details:</p>
+      <dt>Exam:</dt>
+      <dd>{{ data.examType }}</dd>
 
-        <dl class="details">
+      <dt>Room Number:</dt>
+      <dd>{{ data.room }}</dd>
 
-            <dt>Student:</dt>
-            <dd id="student_name"></dd>
-
-            <dt>Date:</dt>
-            <dd id="exam-date"></dd>
-
-            <dt>Time:</dt>
-            <dd id="exam-time"></dd>
-
-            <dt>Exam:</dt>
-            <dd id="exam-name"></dd>
-
-            <dt>Room Number:</dt>
-            <dd id="exam-room"></dd>
-
-            <dt>Proctor:</dt>
-            <dd id="exam-proctor"></dd>
-        </dl>
-      </div>
-
-  <div class="button-container">
-    <a href="#" class="btn">Back To Account</a>
+      <dt>Proctor:</dt>
+      <dd>{{ data.proctor }}</dd>
+    </dl>
   </div>
 
-  <footer class="footer">
+  <div class="button-container">
+    <a href="/" class="btn">Back to Exam Menu</a>
+  </div>
 
-  </footer>
+  <footer class="footer"></footer>
 
 </body>
 </html>
