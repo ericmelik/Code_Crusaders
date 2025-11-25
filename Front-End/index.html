@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="register-box">
+            <h2>Register for Exam</h2>
+
+            <label for="exam">Certification Exam</label>
+            <select id="exam" name="exam">
+                <option value="c++">C++</option>
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+            </select>
+
+            <label for="date">Select Date</label>
+            <input type="date" id="examDate" name="date">
+
+            <label for="time">Select Time</label>
+            <select id="time" name="time">
+                <option value="8am">8:00 AM</option>
+                <option value="11am">11:00 AM</option>
+                <option value="2pm">2:00 PM</option>
+            </select>
+
+            <div class="seats">20 of 20 seats available</div>
+
+            <a href="confirmation.html"><button type="submit">Submit Registration</button></a>
+
+        </div>
+    </div>
+
+    <!-- Script so that date can only be choosen on friday, saturday, sunday -->
+    <script>
+        flatpickr("#examDate", {
+            dateFormat: "Y-m-d",
+            minDate: "today" ,
+            enable: [
+                function(date) {
+                    const day = date.getDay(); // 0 = Sun, 5 = Fri, 6 = Sat
+                    return (day === 5 || day === 6 || day === 0);
+                }
+            ]
+        });
+        </script>
+</body>
+</html>
