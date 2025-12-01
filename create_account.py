@@ -57,5 +57,17 @@ def create_account():
 
     return jsonify({"message": "Account created successfully!"})
 
+# im adding this so we can read the database info also
+@app.route("/users", methods=["GET"])
+def get_users():
+    users = query_db(
+        "SELECT email, nshe_num FROM Users"
+    )
+
+    return jsonify([
+        {"email": row[0], "nshe": row[1]}
+        for row in users
+    ])
+
 if __name__ == "__main__":
     app.run(debug = True)
