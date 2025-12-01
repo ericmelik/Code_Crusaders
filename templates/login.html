@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Login - CSN Exam Registration{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+    <h2 style="margin-bottom: 30px; color: #333;">Login to Your Account</h2>
+    
+    <form method="POST">
+        <label for="email">Email Address</label>
+        <input type="email" 
+               id="email" 
+               name="email" 
+               placeholder="NSHE#@student.csn.edu or faculty@csn.edu" 
+               required>
+        
+        <label for="password">Password (NSHE Number for students)</label>
+        <input type="password" 
+               id="password" 
+               name="password" 
+               placeholder="Enter your password" 
+               required>
+        
+        <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">
+            Login
+        </button>
+    </form>
+    
+    <p style="margin-top: 20px; text-align: center; color: #666;">
+        Don't have an account? 
+        <a href="{{ url_for('register') }}" style="color: #667eea; text-decoration: none;">
+            Register here
+        </a>
+    </p>
+    
+    <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 5px;">
+        <h4 style="margin-bottom: 10px; color: #333;">Login Instructions:</h4>
+        <ul style="margin-left: 20px; color: #666; line-height: 1.8;">
+            <li><strong>Students:</strong> Use your CSN email (NSHE#@student.csn.edu) and NSHE number</li>
+            <li><strong>Faculty:</strong> Use your faculty email and password</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <div class="box">
+        <h2>Student Login</h2>
+        <form method="POST">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="password" required>
+
+            <button type="submit" value="login">Login</button>
+        </form>
+        <a href="/register">Create Test Account</a>
+    </div>
+</body>
+</html> -->

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Register for Exam{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 20px; color: #333;">Available Exams</h2>
+
+<div style="padding: 15px; background: #e3f2fd; border-left: 4px solid #2196F3; margin-bottom: 30px;">
+    <strong>Registration Status:</strong> You have registered for {{ registration_count }} out of 3 allowed exams.
+    {% if at_max %}
+        <br><span style="color: #d32f2f;">⚠️ You've reached the maximum of 3 exam registrations. Cancel one to register for another.</span>
+    {% endif %}
+</div>
+
+{% if exams %}
+    <table>
+        <thead>
+            <tr>
+                <th>Exam Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Faculty</th>
+                <th>Available Seats</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exam in exams %}
+            <tr>
+                <td><strong>{{ exam.exam_name }}</strong></td>
+                <td>{{ exam.exam_date }}</td>
+                <td>{{ exam.exam_time }}</td>
+                <td>
+                    Room {{ exam.room_number }}<br>
+                    Building {{ exam.building_number }}<br>
+                    {{ exam.campus_name }}
+                </td>
+                <td>{{ exam.faculty_name }}</td>
+                <td>
+                     <span id="seat-status">  <!-- HERE WERE CHANGES!!! -->
+                        {{ exam.available_seats }} / {{ exam.capacity }}
+                    </span>
+                </td>
+                <td>
+                    {% if exam.exam_id in registered_exam_ids %}
+                        <span style="color: #388e3c; font-weight: 600;">✓ Registered</span>
+                    {% elif at_max %}
+                        <button class="btn btn-secondary" disabled>Max Reached</button>
+                    {% else %}
+                        <form method="POST" action="{{ url_for('register_exam', exam_id=exam.exam_id) }}" style="margin: 0;">
+                            <button type="submit" class="btn">Register</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div style="padding: 40px; text-align: center; color: #666;">
+        <p style="font-size: 18px;">No exams are currently available for registration.</p>
+        <p style="margin-top: 10px;">Please check back later or contact your faculty.</p>
+    </div>
+{% endif %}
+
+<div style="margin-top: 30px;">
+    <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+</div>
+
+<div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107;">
+    <h4 style="margin-bottom: 10px; color: #333;">Registration Rules:</h4>
+    <ul style="margin-left: 20px; color: #666; line-height: 1.8;">
+        <li>You can register for up to <strong>3 different exams</strong></li>
+        <li>You cannot register for the same exam twice</li>
+        <li>Each exam session has a maximum capacity of 20 students</li>
+        <li>You can cancel registrations from the "My Registrations" page</li>
+    </ul>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Menu</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='exam_menu.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="exam-menu-card">
+      <h1>Exam Menu</h1>
+      <div class="title-underline"></div>
+
+      <form id="examForm" method="POST" action="#">
+        <div class="grid-two-col">
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" id="time" required>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="examType">Exam Type</label>
+          <select id="examType" required>
+            <option value="">Select exam type...</option>
+            <option value="physical">In Person</option>
+            <option value="blood">Online</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="location" value="Building A" checked>
+              <span>West Charleston</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="location" value="Building B">
+              <span>North Las Vegas</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="location" value="Building C">
+              <span>Henderson</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" required>
+            <option value="">Select subject...</option>
+            <option value="cardiology">CIT260</option>
+            <option value="neurology">CS202</option>
+          </select>
+        </div>
+
+        <div class="button-container">
+          <button type="submit" class="schedule-btn">Schedule Exam</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="appointments-card">
+      <h2>Scheduled Appointments</h2>
+      <div class="title-underline"></div>
+
+      <div class="appointments-empty" id="emptyState">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <p>No appointments scheduled yet.<br>Fill out the form to schedule an exam.</p>
+      </div>
+
+      <div id="appointmentsList" style="display: none;"></div>
+    </div>
+  </div>
+  
+  <div style="margin-bottom: 20px;">
+      <a href="{{ url_for('home') }}" class="return-home-btn" style="
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px 17px;
+        background-color: white;
+        color: #012169;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      ">← Return to Home</a>
+    </div>
+    
+  <script src="{{ url_for('static', filename='exam_menu.js') }}"></script>
+</body>
+</html> -->
